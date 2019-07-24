@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+    <persistence-unit name="cuba7Stu" transaction-type="RESOURCE_LOCAL">
+
+        <class>com.zk.cuba7stu.entity.Customer</class>
+        <class>com.zk.cuba7stu.entity.Order</class>
+        <class>com.zk.cuba7stu.entity.OrderLine</class>
+        <class>com.zk.cuba7stu.entity.Production</class>
+    </persistence-unit>
+</persistence>

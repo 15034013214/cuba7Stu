@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="form"
+        messagesPack="com.zk.cuba7stu.web.screens.orderline">
+    <data>
+        <instance id="orderLineDc"
+                  class="com.zk.cuba7stu.entity.OrderLine"
+                  view="orderLine-view">
+            <loader/>
+        </instance>
+        <collection id="prosDc" class="com.zk.cuba7stu.entity.Production" view="production-view">
+            <loader id="productionsDl">
+                <query><![CDATA[select e from cuba7stu_Production e ]]></query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="orderLineDc">
+            <column width="250px">
+                <lookupPickerField id="productionField"
+                                   caption="prodution" optionsContainer="prosDc" property="production"/>
+                <textField id="quantityField" property="quantity"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

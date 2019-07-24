@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="form"
+        messagesPack="com.zk.cuba7stu.web.screens.order">
+    <data>
+        <instance id="orderDc"
+                  class="com.zk.cuba7stu.entity.Order"
+                  view="order-customer-view">
+            <loader/>
+            <collection id="orderOrderLinesDc" property="orderLine"/>
+        </instance>
+        <collection id="customersDc" class="com.zk.cuba7stu.entity.Customer" view="_minimal">
+            <loader id="customersLc">
+                <query>
+                    <![CDATA[select e from cuba7stu_Customer e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="orderDc">
+            <column width="100%">
+                <textField id="orderIdField" property="orderId"/>
+                <textField id="quantityField" property="quantity"/>
+                <lookupPickerField id="customerField" optionsContainer="customersDc" property="customer">
+                    <actions>
+                        <action id="lookup" type="picker_lookup"/>
+                        <action id="open" type="picker_open"/>
+                        <action id="clear" type="picker_clear"/>
+                    </actions>
+                </lookupPickerField>
+                <groupBox dataContainer="orderOrderLinesDc" caption="OrderLine">
+                    <groupTable id="orderOrderLineTable" height="200px" dataContainer="orderOrderLinesDc">
+                        <columns>
+                            <column id="production.productionName"/>
+                            <column id="production.price"/>
+                            <column id="quantity"/>
+                        </columns>
+                        <actions>
+                            <action id="create" type="create"/>
+                            <action id="remove" type="remove"/>
+                            <action id="edit" type="edit"/>
+                        </actions>
+                        <buttonsPanel>
+                            <button action="orderOrderLineTable.create"/>
+                            <button action="orderOrderLineTable.edit"/>
+                            <button action="orderOrderLineTable.remove"/>
+                        </buttonsPanel>
+                    </groupTable>
+                </groupBox>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>
